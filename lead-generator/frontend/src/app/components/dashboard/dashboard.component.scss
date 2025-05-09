@@ -1,0 +1,242 @@
+.dashboard-container {
+  padding: 2rem 0;
+}
+
+.dashboard-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.dashboard-subtitle {
+  color: var(--light-text);
+  margin-bottom: 2rem;
+}
+
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+  
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(74, 107, 255, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    color: var(--light-text);
+    font-size: 1.1rem;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// Stats Grid
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.stat-card {
+  background-color: var(--background-color);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  
+  .stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    background-color: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    
+    .material-icons {
+      font-size: 1.75rem;
+      color: var(--primary-color);
+    }
+    
+    &.qualified {
+      background-color: rgba(52, 211, 153, 0.2);
+      
+      .material-icons {
+        color: var(--success-color);
+      }
+    }
+    
+    &.score {
+      background-color: rgba(245, 158, 11, 0.2);
+      
+      .material-icons {
+        color: var(--warning-color);
+      }
+    }
+  }
+  
+  .stat-content {
+    h3 {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--light-text);
+      margin: 0 0 0.25rem;
+    }
+    
+    .stat-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-color);
+      margin: 0;
+      
+      .stat-unit {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--light-text);
+        margin-left: 0.25rem;
+      }
+    }
+  }
+}
+
+// Charts Section
+.charts-section {
+  margin-bottom: 2rem;
+  
+  .chart-card {
+    background-color: var(--background-color);
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    
+    .chart-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--text-color);
+    }
+  }
+}
+
+// Chart placeholders (would be replaced by Chart.js in a real implementation)
+.chart-placeholder {
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  
+  .placeholder-chart {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    
+    &.pie-chart {
+      width: 380px;
+      height: 80px;
+      margin: 64px auto;
+      border-radius: 5%;
+      background-color: #f0f0f0;
+      position: relative;
+      overflow: hidden;
+      
+      .placeholder-segment {
+        position: absolute;
+        height: 100%;
+        transform-origin: left center;
+        left: 50%;
+        top: 0;
+      }
+    }
+    
+    &.bar-chart {
+      width: 100%;
+      height: 180px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      
+      .placeholder-bar {
+        width: 30px;
+        border-radius: 4px 4px 0 0;
+      }
+    }
+  }
+  
+  .chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      
+      .legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+        margin-right: 0.5rem;
+      }
+      
+      .legend-label {
+        font-size: 0.875rem;
+        color: var(--light-text);
+      }
+    }
+  }
+}
+
+// Actions Section
+.actions-section {
+  .card {
+    padding: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+  }
+  
+  .action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    
+    .btn {
+      display: flex;
+      align-items: center;
+      
+      .material-icons {
+        margin-right: 0.5rem;
+        font-size: 1.25rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+<div class="home-container">
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Welcome to <span class="brand-name">{{ theme.companyName || 'LeadLift' }}</span></h1>
+        <p class="hero-subtitle">AI-Powered Lead Generation and Qualification</p>
+        <p class="hero-description">
+          Capture, qualify, and manage leads with the power of artificial intelligence.
+          LeadLift helps you identify the most promising leads for your business.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" (click)="navigateToAddLead()">Add New Lead</button>
+          <button class="btn btn-outline" (click)="navigateToDashboard()">View Dashboard</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="assets/images/hero-illustration.svg" alt="LeadLift Illustration">
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section">
+    <div class="container">
+      <h2 class="section-title">Key Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <span class="material-icons">person_add</span>
+          </div>
+          <h3>Lead Capture</h3>
+          <p>Easily capture leads through our intuitive form or API integration.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <span class="material-icons">psychology</span>
+          </div>
+          <h3>AI Qualification</h3>
+          <p>Automatically qualify leads using advanced AI algorithms.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <span class="material-icons">storage</span>
+          </div>
+          <h3>Data Storage</h3>
+          <p>Securely store and manage all your leads in CSV format.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <span class="material-icons">dashboard</span>
+          </div>
+          <h3>Analytics Dashboard</h3>
+          <p>Get insights into your lead quality and conversion metrics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works-section">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps-container">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Capture</h3>
+          <p>Collect lead information through our form or API.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Qualify</h3>
+          <p>AI analyzes and scores leads based on multiple factors.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Store</h3>
+          <p>Leads are automatically stored in CSV format.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Analyze</h3>
+          <p>Review lead quality and insights on your dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Start Qualifying Leads?</h2>
+        <p>Begin capturing and qualifying leads with the power of AI.</p>
+        <button class="btn btn-primary" (click)="navigateToAddLead()">Get Started Now</button>
+      </div>
+    </div>
+  </section>
+</div>

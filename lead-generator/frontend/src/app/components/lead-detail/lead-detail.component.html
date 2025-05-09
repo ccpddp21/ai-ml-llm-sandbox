@@ -1,0 +1,135 @@
+<div class="lead-detail-container">
+  <div class="container">
+    <div class="lead-detail-header">
+      <button class="btn btn-outline btn-back" (click)="goBack()">
+        <span class="material-icons">arrow_back</span>
+        Back to Leads
+      </button>
+      <h1 class="lead-detail-title">Lead Details</h1>
+    </div>
+    
+    <div *ngIf="isLoading" class="loading-indicator">
+      <div class="spinner"></div>
+      <p>Loading lead details...</p>
+    </div>
+    
+    <div *ngIf="error" class="alert alert-error">
+      <div class="alert-icon">
+        <span class="material-icons">error</span>
+      </div>
+      <div class="alert-content">
+        <h4>Error Loading Lead</h4>
+        <p>{{ error }}</p>
+      </div>
+    </div>
+    
+    <div *ngIf="!isLoading && !error && lead" class="lead-detail-content">
+      <div class="row">
+        <div class="col-12 col-lg-8">
+          <!-- Lead Information Card -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Lead Information</h2>
+            </div>
+            <div class="card-body">
+              <div class="lead-info-grid">
+                <div class="info-group">
+                  <label>Name</label>
+                  <p>{{ lead.name }}</p>
+                </div>
+                
+                <div class="info-group">
+                  <label>Email</label>
+                  <p>{{ lead.email }}</p>
+                </div>
+                
+                <div class="info-group">
+                  <label>Company</label>
+                  <p>{{ lead.company }}</p>
+                </div>
+                
+                <div class="info-group">
+                  <label>Position</label>
+                  <p>{{ lead.position }}</p>
+                </div>
+                
+                <div class="info-group">
+                  <label>Industry</label>
+                  <p>{{ lead.industry }}</p>
+                </div>
+                
+                <div class="info-group">
+                  <label>Company Size</label>
+                  <p>{{ lead.companySize }} employees</p>
+                </div>
+                
+                <div class="info-group">
+                  <label>Phone</label>
+                  <p>{{ lead.phone || 'Not provided' }}</p>
+                </div>
+                
+                <div class="info-group">
+                  <label>Date Added</label>
+                  <p>{{ lead.createdAt | date:'MMM d, y, h:mm a' }}</p>
+                </div>
+              </div>
+              
+              <div class="message-section" *ngIf="lead.message">
+                <label>Additional Information</label>
+                <div class="message-content">
+                  {{ lead.message }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-12 col-lg-4">
+          <!-- AI Qualification Card -->
+          <div class="card qualification-card">
+            <div class="card-header">
+              <h2 class="card-title">AI Qualification</h2>
+            </div>
+            <div class="card-body">
+              <div class="qualification-score-container">
+                <div class="score-circle" [ngClass]="getScoreClass(lead.qualificationScore)">
+                  <div class="score-value">{{ lead.qualificationScore || 0 }}</div>
+                  <div class="score-label">/ 100</div>
+                </div>
+                <div class="score-text" [ngClass]="getScoreClass(lead.qualificationScore)">
+                  {{ getScoreText(lead.qualificationScore) }}
+                </div>
+              </div>
+              
+              <div class="insights-section" *ngIf="lead.aiInsights">
+                <h3>AI Insights</h3>
+                <div class="insights-content">
+                  {{ lead.aiInsights }}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Actions Card -->
+          <div class="card actions-card">
+            <div class="card-header">
+              <h2 class="card-title">Actions</h2>
+            </div>
+            <div class="card-body">
+              <div class="action-buttons">
+                <button class="btn btn-primary btn-block">
+                  <span class="material-icons">mail</span>
+                  Contact Lead
+                </button>
+                <button class="btn btn-outline btn-block">
+                  <span class="material-icons">edit</span>
+                  Edit Lead
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

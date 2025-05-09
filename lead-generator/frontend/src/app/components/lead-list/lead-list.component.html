@@ -1,0 +1,144 @@
+<div class="lead-list-container">
+  <div class="container">
+    <div class="lead-list-header">
+      <div class="header-title">
+        <h1 class="lead-list-title">Lead Management</h1>
+        <p class="lead-list-subtitle">View and manage all your captured leads</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-primary" routerLink="/add-lead">
+          <span class="material-icons">add</span>
+          Add New Lead
+        </button>
+        <button class="btn btn-outline" (click)="exportLeads()">
+          <span class="material-icons">download</span>
+          Export CSV
+        </button>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="lead-filter-bar">
+        <div class="search-box">
+          <input 
+            type="text" 
+            placeholder="Search leads..." 
+            [(ngModel)]="searchTerm"
+            (keyup.enter)="onSearch()"
+            class="form-control">
+          <button class="search-btn" (click)="onSearch()">
+            <span class="material-icons">search</span>
+          </button>
+        </div>
+        
+        <div class="filter-options">
+          <div class="filter-group">
+            <label>Min. Score:</label>
+            <select 
+              class="form-control" 
+              [(ngModel)]="filterScore" 
+              (change)="onFilterScoreChange(filterScore)">
+              <option [value]="0">All Leads</option>
+              <option [value]="80">High Quality (80+)</option>
+              <option [value]="60">Medium Quality (60+)</option>
+              <option [value]="40">Low Quality (40+)</option>
+            </select>
+          </div>
+          
+          <button class="btn btn-outline btn-sm" (click)="loadLeads()">
+            <span class="material-icons">refresh</span>
+            Refresh
+          </button>
+        </div>
+      </div>
+      
+      <div *ngIf="isLoading" class="loading-indicator">
+        <div class="spinner"></div>
+        <p>Loading leads...</p>
+      </div>
+      
+      <div *ngIf="error" class="alert alert-error">
+        <div class="alert-icon">
+          <span class="material-icons">error</span>
+        </div>
+        <div class="alert-content">
+          <h4>Error Loading Leads</h4>
+          <p>{{ error }}</p>
+        </div>
+      </div>
+      
+      <div *ngIf="!isLoading && !error" class="lead-table-container">
+        <table class="lead-table" *ngIf="filteredLeads.length > 0">
+          <thead>
+            <tr>
+              <th (click)="onSort('name')">
+                Name
+                <span class="sort-icon" *ngIf="sortField === 'name'">
+                  <span class="material-icons">{{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</span>
+                </span>
+              </th>
+              <th (click)="onSort('company')">
+                Company
+                <span class="sort-icon" *ngIf="sortField === 'company'">
+                  <span class="material-icons">{{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</span>
+                </span>
+              </th>
+              <th (click)="onSort('industry')">
+                Industry
+                <span class="sort-icon" *ngIf="sortField === 'industry'">
+                  <span class="material-icons">{{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</span>
+                </span>
+              </th>
+              <th (click)="onSort('qualificationScore')">
+                Score
+                <span class="sort-icon" *ngIf="sortField === 'qualificationScore'">
+                  <span class="material-icons">{{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</span>
+                </span>
+              </th>
+              <th (click)="onSort('createdAt')">
+                Date
+                <span class="sort-icon" *ngIf="sortField === 'createdAt'">
+                  <span class="material-icons">{{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</span>
+                </span>
+              </th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lead of filteredLeads">
+              <td>
+                <div class="lead-name">{{ lead.name }}</div>
+                <div class="lead-email">{{ lead.email }}</div>
+              </td>
+              <td>
+                <div class="lead-company">{{ lead.company }}</div>
+                <div class="lead-position">{{ lead.position }}</div>
+              </td>
+              <td>{{ lead.industry }}</td>
+              <td>
+                <div class="qualification-score" [ngClass]="getScoreClass(lead.qualificationScore)">
+                  {{ lead.qualificationScore }}
+                </div>
+              </td>
+              <td>{{ lead.createdAt | date:'MMM d, y' }}</td>
+              <td>
+                <button class="btn-icon" (click)="viewLead(lead.id)">
+                  <span class="material-icons">visibility</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div *ngIf="filteredLeads.length === 0" class="no-leads">
+          <div class="no-data-icon">
+            <span class="material-icons">search_off</span>
+          </div>
+          <h3>No leads found</h3>
+          <p>Try adjusting your search criteria or add new leads.</p>
+          <button class="btn btn-primary" routerLink="/add-lead">Add New Lead</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

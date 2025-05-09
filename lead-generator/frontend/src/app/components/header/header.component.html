@@ -1,0 +1,36 @@
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <a routerLink="/">
+          <img *ngIf="theme.logo" [src]="theme.logo" alt="LeadLift Logo" class="logo-img">
+          <h1 *ngIf="!theme.logo" class="logo-text">{{ theme.companyName || 'LeadLift' }}</h1>
+        </a>
+      </div>
+      
+      <nav class="nav-desktop">
+        <ul class="nav-list">
+          <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+          <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+          <li><a routerLink="/leads" routerLinkActive="active">Leads</a></li>
+          <li><a routerLink="/add-lead" routerLinkActive="active">Add Lead</a></li>
+          <li><a routerLink="/settings" routerLinkActive="active">Settings</a></li>
+        </ul>
+      </nav>
+      
+      <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
+        <span class="material-icons">{{ isMenuOpen ? 'close' : 'menu' }}</span>
+      </button>
+    </div>
+  </div>
+  
+  <div class="mobile-nav" [class.open]="isMenuOpen">
+    <ul class="mobile-nav-list">
+      <li><a routerLink="/" (click)="toggleMenu()">Home</a></li>
+      <li><a routerLink="/dashboard" (click)="toggleMenu()">Dashboard</a></li>
+      <li><a routerLink="/leads" (click)="toggleMenu()">Leads</a></li>
+      <li><a routerLink="/add-lead" (click)="toggleMenu()">Add Lead</a></li>
+      <li><a routerLink="/settings" (click)="toggleMenu()">Settings</a></li>
+    </ul>
+  </div>
+</header>

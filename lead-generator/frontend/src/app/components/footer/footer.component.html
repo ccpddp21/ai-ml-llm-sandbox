@@ -1,0 +1,36 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <h3>{{ theme.companyName || 'LeadLift' }}</h3>
+        <p>AI-Powered Lead Generation</p>
+      </div>
+      
+      <div class="footer-links">
+        <div class="footer-section">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a routerLink="/">Home</a></li>
+            <li><a routerLink="/dashboard">Dashboard</a></li>
+            <li><a routerLink="/leads">Leads</a></li>
+            <li><a routerLink="/add-lead">Add Lead</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Resources</h4>
+          <ul>
+            <li><a routerLink="/settings">Settings</a></li>
+            <li><a href="javascript:void(0)">Documentation</a></li>
+            <li><a href="javascript:void(0)">API</a></li>
+            <li><a href="javascript:void(0)">Support</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; {{ currentYear }} {{ theme.companyName || 'LeadLift' }}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

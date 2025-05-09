@@ -1,0 +1,116 @@
+<div class="dashboard-container">
+  <div class="container">
+    <h1 class="dashboard-title">Dashboard</h1>
+    <p class="dashboard-subtitle">Overview of your lead generation performance</p>
+    
+    <div *ngIf="isLoading" class="loading-indicator">
+      <div class="spinner"></div>
+      <p>Loading dashboard data...</p>
+    </div>
+    
+    <div *ngIf="!isLoading" class="dashboard-content">
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <span class="material-icons">people</span>
+          </div>
+          <div class="stat-content">
+            <h3>Total Leads</h3>
+            <p class="stat-value">{{ leadCount }}</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon qualified">
+            <span class="material-icons">verified</span>
+          </div>
+          <div class="stat-content">
+            <h3>Qualified Leads</h3>
+            <p class="stat-value">{{ qualifiedLeadCount }}</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon score">
+            <span class="material-icons">analytics</span>
+          </div>
+          <div class="stat-content">
+            <h3>Average Score</h3>
+            <p class="stat-value">{{ averageScore }}<span class="stat-unit">/100</span></p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Charts Section -->
+      <div class="charts-section">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="chart-card">
+              <h3 class="chart-title">Lead Qualification Distribution</h3>
+              <div class="chart-placeholder">
+                <!-- Chart.js would be rendered here -->
+                <div class="placeholder-chart pie-chart">
+                  <div *ngFor="let value of qualificationData.datasets[0].data; let i = index" 
+                       class="placeholder-segment" 
+                       [style.background-color]="qualificationData.datasets[0].backgroundColor[i]"
+                       [style.width.%]="value > 0 ? (value / leadCount) * 100 : 0">
+                  </div>
+                </div>
+                <div class="chart-legend">
+                  <div *ngFor="let label of qualificationData.labels; let i = index" class="legend-item">
+                    <span class="legend-color" [style.background-color]="qualificationData.datasets[0].backgroundColor[i]"></span>
+                    <span class="legend-label">{{ label }}: {{ qualificationData.datasets[0].data[i] }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-12 col-md-6">
+            <div class="chart-card">
+              <h3 class="chart-title">Leads by Industry</h3>
+              <div class="chart-placeholder">
+                <!-- Chart.js would be rendered here -->
+                <div class="placeholder-chart bar-chart">
+                  <div *ngFor="let value of industryData.datasets[0].data; let i = index" 
+                       class="placeholder-bar" 
+                       [style.backgroundColor]="industryData.datasets[0].backgroundColor[i]"
+                       [style.height.%]="value > 0 && industryData.datasets[0].data.length > 0 ? (value / Math.max.apply(null, industryData.datasets[0].data)) * 80 : 0">
+                  </div>
+                </div>
+                <div class="chart-legend">
+                  <div *ngFor="let label of industryData.labels; let i = index" class="legend-item">
+                    <span class="legend-color" [style.background-color]="industryData.datasets[0].backgroundColor[i]"></span>
+                    <span class="legend-label">{{ label }}: {{ industryData.datasets[0].data[i] }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Actions Section -->
+      <div class="actions-section">
+        <div class="card">
+          <h3 class="section-title">Quick Actions</h3>
+          <div class="action-buttons">
+            <a routerLink="/add-lead" class="btn btn-primary">
+              <span class="material-icons">add</span>
+              Add New Lead
+            </a>
+            <a routerLink="/leads" class="btn btn-outline">
+              <span class="material-icons">list</span>
+              View All Leads
+            </a>
+            <button class="btn btn-outline" (click)="loadDashboardData()">
+              <span class="material-icons">refresh</span>
+              Refresh Data
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,177 @@
+<div class="lead-form-container">
+  <div class="container">
+    <div class="card">
+      <h2 class="form-title">Add New Lead</h2>
+      <p class="form-subtitle">Enter lead information to qualify with AI</p>
+      
+      <div *ngIf="submitSuccess" class="alert alert-success">
+        <div class="alert-icon">
+          <span class="material-icons">check_circle</span>
+        </div>
+        <div class="alert-content">
+          <h4>Lead Submitted Successfully!</h4>
+          <p>Your lead has been qualified by AI and saved. Redirecting to leads list...</p>
+        </div>
+      </div>
+      
+      <div *ngIf="submitError" class="alert alert-error">
+        <div class="alert-icon">
+          <span class="material-icons">error</span>
+        </div>
+        <div class="alert-content">
+          <h4>Error Submitting Lead</h4>
+          <p>{{ submitError }}</p>
+        </div>
+      </div>
+      
+      <form [formGroup]="leadForm" (ngSubmit)="onSubmit()" class="lead-form">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label for="name" class="form-label">Full Name *</label>
+              <input 
+                type="text" 
+                id="name" 
+                formControlName="name" 
+                class="form-control" 
+                [ngClass]="{'is-invalid': f['name'].touched && f['name'].errors}"
+                placeholder="John Doe">
+              <div *ngIf="f['name'].touched && f['name'].errors" class="invalid-feedback">
+                <div *ngIf="f['name'].errors['required']">Name is required</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address *</label>
+              <input 
+                type="email" 
+                id="email" 
+                formControlName="email" 
+                class="form-control" 
+                [ngClass]="{'is-invalid': f['email'].touched && f['email'].errors}"
+                placeholder="john@example.com">
+              <div *ngIf="f['email'].touched && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">Email is required</div>
+                <div *ngIf="f['email'].errors['email']">Please enter a valid email address</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label for="company" class="form-label">Company Name *</label>
+              <input 
+                type="text" 
+                id="company" 
+                formControlName="company" 
+                class="form-control" 
+                [ngClass]="{'is-invalid': f['company'].touched && f['company'].errors}"
+                placeholder="Acme Inc.">
+              <div *ngIf="f['company'].touched && f['company'].errors" class="invalid-feedback">
+                <div *ngIf="f['company'].errors['required']">Company name is required</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label for="position" class="form-label">Job Position *</label>
+              <input 
+                type="text" 
+                id="position" 
+                formControlName="position" 
+                class="form-control" 
+                [ngClass]="{'is-invalid': f['position'].touched && f['position'].errors}"
+                placeholder="Marketing Director">
+              <div *ngIf="f['position'].touched && f['position'].errors" class="invalid-feedback">
+                <div *ngIf="f['position'].errors['required']">Job position is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label for="industry" class="form-label">Industry *</label>
+              <select 
+                id="industry" 
+                formControlName="industry" 
+                class="form-control" 
+                [ngClass]="{'is-invalid': f['industry'].touched && f['industry'].errors}">
+                <option value="" disabled selected>Select Industry</option>
+                <option *ngFor="let industry of industries" [value]="industry">{{ industry }}</option>
+              </select>
+              <div *ngIf="f['industry'].touched && f['industry'].errors" class="invalid-feedback">
+                <div *ngIf="f['industry'].errors['required']">Industry is required</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label for="companySize" class="form-label">Company Size *</label>
+              <select 
+                id="companySize" 
+                formControlName="companySize" 
+                class="form-control" 
+                [ngClass]="{'is-invalid': f['companySize'].touched && f['companySize'].errors}">
+                <option value="" disabled selected>Select Company Size</option>
+                <option *ngFor="let size of companySizes" [value]="size">{{ size }} employees</option>
+              </select>
+              <div *ngIf="f['companySize'].touched && f['companySize'].errors" class="invalid-feedback">
+                <div *ngIf="f['companySize'].errors['required']">Company size is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone Number (optional)</label>
+              <input 
+                type="tel" 
+                id="phone" 
+                formControlName="phone" 
+                class="form-control" 
+                [ngClass]="{'is-invalid': f['phone'].touched && f['phone'].errors}"
+                placeholder="+1 (555) 123-4567">
+              <div *ngIf="f['phone'].touched && f['phone'].errors" class="invalid-feedback">
+                <div *ngIf="f['phone'].errors['pattern']">Please enter a valid phone number</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="message" class="form-label">Additional Information (optional)</label>
+              <textarea 
+                id="message" 
+                formControlName="message" 
+                class="form-control" 
+                rows="4"
+                placeholder="Any additional details about the lead..."></textarea>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+            <span *ngIf="isSubmitting">
+              <span class="spinner"></span> Submitting...
+            </span>
+            <span *ngIf="!isSubmitting">Submit Lead</span>
+          </button>
+          <button type="button" class="btn btn-outline" routerLink="/leads">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

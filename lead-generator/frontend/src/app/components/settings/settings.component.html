@@ -1,0 +1,129 @@
+<div class="settings-container">
+  <div class="container">
+    <div class="card">
+      <h2 class="settings-title">Application Settings</h2>
+      <p class="settings-subtitle">Customize the appearance and branding of LeadLift</p>
+      
+      <div *ngIf="saveSuccess" class="alert alert-success">
+        <div class="alert-icon">
+          <span class="material-icons">check_circle</span>
+        </div>
+        <div class="alert-content">
+          <h4>Settings Saved Successfully!</h4>
+          <p>Your customization settings have been applied.</p>
+        </div>
+      </div>
+      
+      <form [formGroup]="themeForm" (ngSubmit)="onSubmit()" class="settings-form">
+        <div class="form-section">
+          <h3 class="section-title">Branding</h3>
+          
+          <div class="form-group">
+            <label for="companyName" class="form-label">Company Name</label>
+            <input 
+              type="text" 
+              id="companyName" 
+              formControlName="companyName" 
+              class="form-control"
+              placeholder="LeadLift">
+            <small class="form-text">This will be displayed in the header and footer.</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="logo" class="form-label">Logo URL (optional)</label>
+            <input 
+              type="text" 
+              id="logo" 
+              formControlName="logo" 
+              class="form-control"
+              placeholder="https://example.com/logo.png">
+            <small class="form-text">Enter a URL to your logo image. Leave empty to use text logo.</small>
+          </div>
+        </div>
+        
+        <div class="form-section">
+          <h3 class="section-title">Theme Colors</h3>
+          
+          <div class="color-grid">
+            <div class="color-picker">
+              <label for="primaryColor" class="form-label">Primary Color</label>
+              <div class="color-input-group">
+                <input 
+                  type="color" 
+                  id="primaryColor" 
+                  formControlName="primaryColor" 
+                  class="color-input">
+                <input 
+                  type="text" 
+                  formControlName="primaryColor" 
+                  class="form-control color-text"
+                  placeholder="#4a6bff">
+              </div>
+              <small class="form-text">Main brand color used for buttons and accents.</small>
+            </div>
+            
+            <div class="color-picker">
+              <label for="primaryLight" class="form-label">Primary Light Color</label>
+              <div class="color-input-group">
+                <input 
+                  type="color" 
+                  id="primaryLight" 
+                  formControlName="primaryLight" 
+                  class="color-input">
+                <input 
+                  type="text" 
+                  formControlName="primaryLight" 
+                  class="form-control color-text"
+                  placeholder="#e8edff">
+              </div>
+              <small class="form-text">Light version of primary color for backgrounds.</small>
+            </div>
+            
+            <div class="color-picker">
+              <label for="secondaryColor" class="form-label">Secondary Color</label>
+              <div class="color-input-group">
+                <input 
+                  type="color" 
+                  id="secondaryColor" 
+                  formControlName="secondaryColor" 
+                  class="color-input">
+                <input 
+                  type="text" 
+                  formControlName="secondaryColor" 
+                  class="form-control color-text"
+                  placeholder="#34d399">
+              </div>
+              <small class="form-text">Used for secondary elements and accents.</small>
+            </div>
+          </div>
+        </div>
+        
+        <div class="theme-preview">
+          <h3 class="section-title">Preview</h3>
+          <div class="preview-container" [style.--preview-primary]="themeForm.get('primaryColor')?.value" 
+               [style.--preview-primary-light]="themeForm.get('primaryLight')?.value"
+               [style.--preview-secondary]="themeForm.get('secondaryColor')?.value">
+            <div class="preview-header">
+              <div class="preview-logo">{{ themeForm.get('companyName')?.value || 'LeadLift' }}</div>
+              <div class="preview-nav">
+                <div class="preview-nav-item active"></div>
+                <div class="preview-nav-item"></div>
+                <div class="preview-nav-item"></div>
+              </div>
+            </div>
+            <div class="preview-content">
+              <div class="preview-title"></div>
+              <div class="preview-text"></div>
+              <div class="preview-button"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Save Settings</button>
+          <button type="button" class="btn btn-outline" (click)="resetToDefault()">Reset to Default</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
